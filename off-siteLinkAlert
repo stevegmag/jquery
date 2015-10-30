@@ -1,0 +1,37 @@
+jQuery(document).ready( function() { 
+	var $ = jQuery;
+	var root = new RegExp(window.location.host,'i');
+	// needds to handle www. & non-www. urls the same
+
+// may need to add more specific selector depending on site
+	$('a').each(function() {
+		var testURL = $(this).attr('href');
+	    if(root.test(testURL)) { 
+	        $(this).addClass('local');
+	    }
+	    else {
+	        // a link that does not contain the current host
+	        if(testURL.length > 1) {
+	            $(this).addClass('external');
+	        }
+	        else {
+	            $(this).addClass('wonky-link');
+	        }
+	    }
+	});
+
+	$('a.external').live('click', function(e) {
+
+	    e.preventDefault();
+	    e.stopPropagation();
+
+	    var answer = confirm("You are now leaving Acromegaly.com. Links to all outside websites do not imply a recommendation by Chiasma. Chiasma accepts no responsibility or liability for the content or services of other websites.");
+
+	    if (answer) {
+	    	var win = window.open($(this).attr('href'), '_blank');
+			win.focus();
+	    } 
+
+	});
+
+});
