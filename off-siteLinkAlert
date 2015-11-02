@@ -1,26 +1,35 @@
 jQuery(document).ready( function() { 
 	var $ = jQuery;
+	var re = new RegExp("^(http|https)://", "i");
 	var root = new RegExp(window.location.host,'i');
 	// needds to handle www. & non-www. urls the same
 
 // may need to add more specific selector depending on site
 	$('a').each(function() {
-		var testURL = $(this).attr('href');
-	    if(root.test(testURL)) { 
-	        $(this).addClass('local');
-	    }
-	    else {
-	        // a link that does not contain the current host
-	        if(testURL.length > 1) {
-	            $(this).addClass('external');
-	        }
-	        else {
-	            $(this).addClass('wonky-link');
-	        }
-	    }
+		if($(this).attr('href')) {
+			//link has an href
+			var testURL = $(this).attr('href');
+			console.log("TestURL :: "+ testURL);
+			
+		    if(root.test(testURL)) { // URL matches current location
+		        $(this).addClass('local');
+		    }
+		    else {
+				if(re.test(testURL)) { 
+				// URL Starts with http(s)
+			        // a link that does not contain the current host
+			        if(testURL.length > 1) {
+			            $(this).addClass('external');
+			        }
+			        else {
+			            $(this).addClass('wonky-link');
+			        }
+			    }
+			}    
+		}
 	});
 
-	$('a.external').live('click', function(e) {
+	$('a.external').on('click', function(e) {
 
 	    e.preventDefault();
 	    e.stopPropagation();
