@@ -2,7 +2,11 @@
 for each value upto and including 1000...
 print the number and fizz if the number is divisible by 3
 print the number and buzz if the number is divisible by 5
-print the number and Fizz if the number is divisible by both 3 and 5
+print the number and fizzbuzz if the number is divisible by both 3 and 5
+*/
+
+/* 
+add a sum of each of the values that print fizz, buzz, or fizzbuzz
 */
 
 let sum = 0;
@@ -25,7 +29,9 @@ console.log( "FizzBuzzSum:: "+sum );
 
 
 
-//  sum all values upto and including 1000 that are divisible by either 3 or 5
+/*
+sum all values upto and including 1000 that are divisible by either 3 or 5
+*/
 let sum = 0;                                                                                                                                  
 for(let i = 1; i <= 1000; i++) {                                                                                                              
    if((i % 3 == 0) || (i % 5 == 0)) {                                                                                                        
